@@ -8,24 +8,37 @@
 import Foundation
 import SwiftUI
 
-enum Components: CaseIterable {
+struct Chapter: Identifiable, Hashable {
+    let id = UUID()
+    let type: ComponentType
+    let pages: [Components]
+}
+
+enum ComponentType: String {
+    case button
+    case textInput
+    case card
+    case generic
+}
+
+/// What does this enum provide?
+enum Components: CaseIterable, Identifiable {
+    var id: UUID {
+        UUID()
+    }
+
     case headerView
     case reallyCoolButton
     case dashboardView
+    case alternativeButton
 
-    var allComponents: Any {
-        switch self {
-            case .headerView: return HeaderView.self
-            case .reallyCoolButton: return ReallyCoolButton.self
-            case .dashboardView: return DashboardCardSmall.self
-        }
-    }
-
+    /// Title shown in navigation list76
     var title: String {
         switch self {
             case .headerView: return "Header View"
             case .reallyCoolButton: return "Really Cool Button"
             case .dashboardView: return "Dashboard"
+            case .alternativeButton: return "Alternative Button"
         }
     }
 
@@ -34,25 +47,22 @@ enum Components: CaseIterable {
             case .headerView: return AnyView(HeaderView())
             case .reallyCoolButton: return AnyView(ReallyCoolButton())
             case .dashboardView: return AnyView(DashboardCardSmall())
+            case .alternativeButton: return AnyView(EmptyView())
         }
     }
 
-    /// Title to be shown in navigation list
-//    func viewTitles(views: [Any], index: Int) -> String {
-//        switch views[index].self {
-//            case is HeaderView.Type: return "Header View"
-//            case is ReallyCoolButton.Type: return "Really Cool Button"
-//            case is DashboardCardSmall.Type: return "Dashboard card"
-//            default: return ""
-//        }
-//    }
-
-//    func buildView(views: [Any], index: Int) -> AnyView {
-//        switch views[index].self {
-//            case is HeaderView.Type: return AnyView(HeaderView())
-//            case is ReallyCoolButton.Type: return AnyView(ReallyCoolButton())
-//            case is DashboardCardSmall.Type: return AnyView(DashboardCardSmall())
-//            default: return AnyView(EmptyView())
-//        }
-//    }
+    @ViewBuilder func viewBuilder() -> some View {
+        VStack {
+            switch self {
+                case .headerView:
+                    HeaderView()
+                case .reallyCoolButton:
+                    ReallyCoolButton()
+                case .alternativeButton:
+                    EmptyView()
+                case .dashboardView:
+                    DashboardCardSmall()
+            }
+        }
+    }
 }
