@@ -14,6 +14,7 @@ struct Chapter: Identifiable, Hashable {
     let pages: [Components]
 }
 
+/// The type in which to categorize a view
 enum ComponentType: String {
     case button
     case textInput
@@ -21,7 +22,7 @@ enum ComponentType: String {
     case generic
 }
 
-/// What does this enum provide?
+/// Individual views and respective information
 enum Components: CaseIterable, Identifiable {
     var id: UUID {
         UUID()
@@ -32,13 +33,23 @@ enum Components: CaseIterable, Identifiable {
     case dashboardView
     case alternativeButton
 
-    /// Title shown in navigation list76
+    /// Title shown in navigation list
     var title: String {
         switch self {
             case .headerView: return "Header View"
             case .reallyCoolButton: return "Really Cool Button"
             case .dashboardView: return "Dashboard"
             case .alternativeButton: return "Alternative Button"
+        }
+    }
+
+    /// Additional information about each component
+    var description: String {
+        switch self {
+            case .headerView: return ""
+            case .reallyCoolButton: return ""
+            case .dashboardView: return ""
+            case .alternativeButton: return ""
         }
     }
 
@@ -51,18 +62,11 @@ enum Components: CaseIterable, Identifiable {
         }
     }
 
+    /// Helper function to layout page view for components
     @ViewBuilder func viewBuilder() -> some View {
-        VStack {
-            switch self {
-                case .headerView:
-                    HeaderView()
-                case .reallyCoolButton:
-                    ReallyCoolButton()
-                case .alternativeButton:
-                    EmptyView()
-                case .dashboardView:
-                    DashboardCardSmall()
-            }
+        VStack(spacing: 30) {
+            Text(self.title)
+            view
         }
     }
 }

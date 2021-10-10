@@ -21,7 +21,7 @@ struct PageList: View {
                 ForEach(chapters, id: \.self.type) { chapter in
                     Section(header: Text(chapter.type.rawValue.uppercased())) {
                         ForEach(chapter.pages, id: \.self) { page in
-                            NavigationLink(page.title, destination: page.view)
+                            NavigationLink(page.title, destination: page.viewBuilder())
                         }
                     }
                 }

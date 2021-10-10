@@ -19,7 +19,7 @@ struct Book_Preview: PreviewProvider, Previewable {
     }
 
     static var environmentColor: ColorScheme {
-        .dark
+        .light
     }
 
     static var previews: some View {
@@ -37,6 +37,6 @@ struct Book_Preview: PreviewProvider, Previewable {
     }
 
     static func create(from viewModel: String) -> some View {
-        Text("Hi")
+        Book()
     }
 }
