@@ -7,27 +7,9 @@
 
 import SwiftUI
 
-struct Page: Hashable, View {
-    @ViewBuilder var view: some View {
-        AnyView(self)
-    }
-}
-
 struct Book: View {
-    let chapters: [Chapter]
     var body: some View {
-        NavigationView {
-            ForEach(chapters, id: \.self) { chapter in
-                ForEach(chapter.pages, id: \.self) { page in
-                    NavigationLink("Element", destination: page)
-                }
-//            switch chapter {
-//                case .some(let view):
-//                    NavigationLink("view", destination: view)
-//                case .none:
-//                    EmptyView()
-            }
-        }
+        AllViews()
     }
 }
 
@@ -55,6 +37,6 @@ struct Book_Preview: PreviewProvider, Previewable {
     }
 
     static func create(from viewModel: String) -> some View {
-        Book(chapters: [Chapter(id: UUID(), pages: [Page()])])
+        Text("Hi")
     }
 }
