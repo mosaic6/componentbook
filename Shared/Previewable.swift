@@ -31,13 +31,13 @@ extension Previewable {
         Group {
             AnyView(create(from: defaultViewModel.viewModel))
                 .environment(\.colorScheme, environmentColor)
-                .previewDisplayName("\(defaultViewModel.id) Light")
+                .previewDisplayName("\(defaultViewModel.id) \(environmentColor)")
                 .previewLayout(layout)
 
             // 10 or more items/views
             ForEach(alternateViewModels, id: \.id) { previewData in
                 AnyView(create(from: previewData.viewModel))
-                    .previewDisplayName("\(previewData.id) Light")
+                    .previewDisplayName("\(previewData.id) \(environmentColor)")
                     .previewLayout(layout)
             }
         }
@@ -56,6 +56,7 @@ extension Previewable {
         }
     }
 
+    #if os(macOS)
     static func capturedPreviews(title: String) -> [(String, NSImage)] {
 
         var captured: [(String, NSImage)] = []
@@ -70,10 +71,12 @@ extension Previewable {
 
         return captured
     }
+    #endif
 }
 
 #endif
 
+#if os(macOS)
 extension NSHostingView {
 
     var snapshot: NSImage {
@@ -128,5 +131,4 @@ extension NSHostingView {
         }
     }
 }
-
-
+#endif

@@ -31,9 +31,7 @@ struct Book_Preview: PreviewProvider, Previewable {
     }
 
     static var alternateViewModels: [PreviewData<String>] {
-        [PreviewData(id: "Book", viewModel: ""),
-         PreviewData(id: "Book", viewModel: ""),
-         PreviewData(id: "Book", viewModel: "")]
+        [PreviewData(id: "Book", viewModel: "")]
     }
 
     static func create(from viewModel: String) -> some View {

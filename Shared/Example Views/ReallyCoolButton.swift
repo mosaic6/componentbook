@@ -13,7 +13,12 @@ struct ReallyCoolButton: View {
             Button(action: {
                 print("Wow, this is awesome!")
             }, label: {
-                Text("Button")
+                HStack {
+                    Text("CoolButton")
+                    Image(systemName: "paperplane.circle.fill")
+                        .foregroundColor(.white)
+
+                }
             })
         }
     }
