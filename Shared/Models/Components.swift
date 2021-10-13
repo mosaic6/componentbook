@@ -8,12 +8,6 @@
 import Foundation
 import SwiftUI
 
-struct Chapter: Identifiable, Hashable {
-    let id = UUID()
-    let type: ComponentType
-    let pages: [Components]
-}
-
 /// The type in which to categorize a view
 enum ComponentType: String {
     case button
@@ -58,7 +52,7 @@ enum Components: CaseIterable, Identifiable {
             case .headerView: return AnyView(HeaderView())
             case .reallyCoolButton: return AnyView(ReallyCoolButton())
             case .dashboardView: return AnyView(DashboardCardSmall())
-            case .alternativeButton: return AnyView(EmptyView())
+            case .alternativeButton: return AnyView(AlternateButton())
         }
     }
 
